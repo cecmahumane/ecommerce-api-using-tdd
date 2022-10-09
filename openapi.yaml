@@ -1,0 +1,360 @@
+openapi: 3.0.3
+info:
+  title: Codecademy E-Commerce API
+  version: 1.0.0
+  description: 'A basic API for e-commerce transaction demonstration. '
+paths:
+  /api/profile:
+    summary: Add a hashed password and username to the database
+    description: >-
+      This path is used to add the users validated username and hashed password
+      to the database.
+    post:
+      summary: Posts user registration details
+      description: >-
+        Sends user email to be verified and password to be hashed by the server
+        before entry into database.
+      operationId: post_user_profile
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              examples:
+                user profile:
+                  value: |-
+                    {
+                        "command": "INSERT",
+                        "rowCount": 1,
+                        "oid": 0,
+                        "rows": [],
+                        "fields": [],
+                        "_types": {
+                            "_types": {
+                                "arrayParser": {},
+                                "builtins": {
+                                    "BOOL": 16,
+                                    "BYTEA": 17,
+                                    "CHAR": 18,
+                                    "INT8": 20,
+                                    "INT2": 21,
+                                    "INT4": 23,
+                                    "REGPROC": 24,
+                                    "TEXT": 25,
+                                    "OID": 26,
+                                    "TID": 27,
+                                    "XID": 28,
+                                    "CID": 29,
+                                    "JSON": 114,
+                                    "XML": 142,
+                                    "PG_NODE_TREE": 194,
+                                    "SMGR": 210,
+                                    "PATH": 602,
+                                    "POLYGON": 604,
+                                    "CIDR": 650,
+                                    "FLOAT4": 700,
+                                    "FLOAT8": 701,
+                                    "ABSTIME": 702,
+                                    "RELTIME": 703,
+                                    "TINTERVAL": 704,
+                                    "CIRCLE": 718,
+                                    "MACADDR8": 774,
+                                    "MONEY": 790,
+                                    "MACADDR": 829,
+                                    "INET": 869,
+                                    "ACLITEM": 1033,
+                                    "BPCHAR": 1042,
+                                    "VARCHAR": 1043,
+                                    "DATE": 1082,
+                                    "TIME": 1083,
+                                    "TIMESTAMP": 1114,
+                                    "TIMESTAMPTZ": 1184,
+                                    "INTERVAL": 1186,
+                                    "TIMETZ": 1266,
+                                    "BIT": 1560,
+                                    "VARBIT": 1562,
+                                    "NUMERIC": 1700,
+                                    "REFCURSOR": 1790,
+                                    "REGPROCEDURE": 2202,
+                                    "REGOPER": 2203,
+                                    "REGOPERATOR": 2204,
+                                    "REGCLASS": 2205,
+                                    "REGTYPE": 2206,
+                                    "UUID": 2950,
+                                    "TXID_SNAPSHOT": 2970,
+                                    "PG_LSN": 3220,
+                                    "PG_NDISTINCT": 3361,
+                                    "PG_DEPENDENCIES": 3402,
+                                    "TSVECTOR": 3614,
+                                    "TSQUERY": 3615,
+                                    "GTSVECTOR": 3642,
+                                    "REGCONFIG": 3734,
+                                    "REGDICTIONARY": 3769,
+                                    "JSONB": 3802,
+                                    "REGNAMESPACE": 4089,
+                                    "REGROLE": 4096
+                                }
+                            },
+                            "text": {},
+                            "binary": {}
+                        },
+                        "RowCtor": null,
+                        "rowAsArray": false
+                    }
+        default:
+          description: Default error sample response
+      tags:
+        - Profile
+  /api/products:
+    summary: Get all product images.
+    description: >-
+      This path is used to retrieve all of the product data, and is used to get
+      the images associated with each product.
+    get:
+      summary: Gets product data
+      description: Retrieves the data of all products in the database.
+      operationId: get_product_data
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            application/json:
+              examples:
+                all product data:
+                  value: |-
+                    [
+                        {
+                            "id": 1,
+                            "product_name": "T-Shirt",
+                            "product_description": "<h2 data-test=\"title\">Classic</h2>\n                                          <p data-test=\"price\">$35.00</p>\n                                          <p data-test=\"p1\">So classy it hurts.</p> \n                                          <p data-test=\"p2\">100% combed ring-spun cotton</p> \n                                          <p data-test=\"p3\">Printed on Next Level garment</p> \n                                          <p data-test=\"p4\">Pre-shrunk</p> \n                                          <p data-test=\"p5\">Tear-away label</p>",
+                            "unit_price": "35.00",
+                            "quantity_small": "25",
+                            "quantity_med": "25",
+                            "quantity_large": "25",
+                            "image1": "/images/Tshirt.jpg",
+                            "image2": "/images/Greytshirt.png"
+                        },
+                        {
+                            "id": 2,
+                            "product_name": "Hoodie",
+                            "product_description": "<h2 data-test=\"title\">Hoodie</h2>\n                                          <p data-test=\"price\">$49.00</p>\n                                          <p data-test=\"p1\">Comfy. Cozy.</p> \n                                          <p data-test=\"p2\">100% California fleece cotton</p> \n                                          <p data-test=\"p3\">Super sweet drawstrings</p> \n                                          <p data-test=\"p4\">Raglan sleeves</p> \n                                          <p data-test=\"p5\">Front pouch pocket</p>",
+                            "unit_price": "49.00",
+                            "quantity_small": "25",
+                            "quantity_med": "25",
+                            "quantity_large": "25",
+                            "image1": "/images/Hoodie.jpg",
+                            "image2": "/images/Greyhoodie.png"
+                        }
+                    ]
+      tags:
+        - All Products Data
+  /api/products/{id}:
+    summary: Individual product details
+    description: >-
+      This path is used to retrieve all the product details associated with an
+      individual item.
+    get:
+      parameters:
+        - in: path
+          name: id   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: The user ID
+      summary: Gets individual product data.
+      description: Retrieves all the data of an individual product from database.
+      operationId: get_product_details
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            application/json:
+              examples:
+                individual product data:
+                  value: |-
+                    {
+                        "command": "SELECT",
+                        "rowCount": 1,
+                        "oid": null,
+                        "rows": [
+                            {
+                                "id": 2,
+                                "product_name": "Hoodie",
+                                "product_description": "<h2 data-test=\"title\">Hoodie</h2>\n                                          <p data-test=\"price\">$49.00</p>\n                                          <p data-test=\"p1\">Comfy. Cozy.</p> \n                                          <p data-test=\"p2\">100% California fleece cotton</p> \n                                          <p data-test=\"p3\">Super sweet drawstrings</p> \n                                          <p data-test=\"p4\">Raglan sleeves</p> \n                                          <p data-test=\"p5\">Front pouch pocket</p>",
+                                "unit_price": "49.00",
+                                "quantity_small": "25",
+                                "quantity_med": "25",
+                                "quantity_large": "25",
+                                "image1": "/images/Hoodie.jpg",
+                                "image2": "/images/Greyhoodie.png"
+                            }
+                        ],
+                        "fields": [
+                            {
+                                "name": "id",
+                                "tableID": 17028,
+                                "columnID": 1,
+                                "dataTypeID": 23,
+                                "dataTypeSize": 4,
+                                "dataTypeModifier": -1,
+                                "format": "text"
+                            },
+                            {
+                                "name": "product_name",
+                                "tableID": 17028,
+                                "columnID": 2,
+                                "dataTypeID": 1043,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": 259,
+                                "format": "text"
+                            },
+                            {
+                                "name": "product_description",
+                                "tableID": 17028,
+                                "columnID": 3,
+                                "dataTypeID": 1043,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": 1004,
+                                "format": "text"
+                            },
+                            {
+                                "name": "unit_price",
+                                "tableID": 17028,
+                                "columnID": 4,
+                                "dataTypeID": 1700,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": -1,
+                                "format": "text"
+                            },
+                            {
+                                "name": "quantity_small",
+                                "tableID": 17028,
+                                "columnID": 5,
+                                "dataTypeID": 1700,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": -1,
+                                "format": "text"
+                            },
+                            {
+                                "name": "quantity_med",
+                                "tableID": 17028,
+                                "columnID": 6,
+                                "dataTypeID": 1700,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": -1,
+                                "format": "text"
+                            },
+                            {
+                                "name": "quantity_large",
+                                "tableID": 17028,
+                                "columnID": 7,
+                                "dataTypeID": 1700,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": -1,
+                                "format": "text"
+                            },
+                            {
+                                "name": "image1",
+                                "tableID": 17028,
+                                "columnID": 8,
+                                "dataTypeID": 1043,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": 259,
+                                "format": "text"
+                            },
+                            {
+                                "name": "image2",
+                                "tableID": 17028,
+                                "columnID": 9,
+                                "dataTypeID": 1043,
+                                "dataTypeSize": -1,
+                                "dataTypeModifier": 259,
+                                "format": "text"
+                            }
+                        ],
+                        "_parsers": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "_types": {
+                            "_types": {
+                                "arrayParser": {},
+                                "builtins": {
+                                    "BOOL": 16,
+                                    "BYTEA": 17,
+                                    "CHAR": 18,
+                                    "INT8": 20,
+                                    "INT2": 21,
+                                    "INT4": 23,
+                                    "REGPROC": 24,
+                                    "TEXT": 25,
+                                    "OID": 26,
+                                    "TID": 27,
+                                    "XID": 28,
+                                    "CID": 29,
+                                    "JSON": 114,
+                                    "XML": 142,
+                                    "PG_NODE_TREE": 194,
+                                    "SMGR": 210,
+                                    "PATH": 602,
+                                    "POLYGON": 604,
+                                    "CIDR": 650,
+                                    "FLOAT4": 700,
+                                    "FLOAT8": 701,
+                                    "ABSTIME": 702,
+                                    "RELTIME": 703,
+                                    "TINTERVAL": 704,
+                                    "CIRCLE": 718,
+                                    "MACADDR8": 774,
+                                    "MONEY": 790,
+                                    "MACADDR": 829,
+                                    "INET": 869,
+                                    "ACLITEM": 1033,
+                                    "BPCHAR": 1042,
+                                    "VARCHAR": 1043,
+                                    "DATE": 1082,
+                                    "TIME": 1083,
+                                    "TIMESTAMP": 1114,
+                                    "TIMESTAMPTZ": 1184,
+                                    "INTERVAL": 1186,
+                                    "TIMETZ": 1266,
+                                    "BIT": 1560,
+                                    "VARBIT": 1562,
+                                    "NUMERIC": 1700,
+                                    "REFCURSOR": 1790,
+                                    "REGPROCEDURE": 2202,
+                                    "REGOPER": 2203,
+                                    "REGOPERATOR": 2204,
+                                    "REGCLASS": 2205,
+                                    "REGTYPE": 2206,
+                                    "UUID": 2950,
+                                    "TXID_SNAPSHOT": 2970,
+                                    "PG_LSN": 3220,
+                                    "PG_NDISTINCT": 3361,
+                                    "PG_DEPENDENCIES": 3402,
+                                    "TSVECTOR": 3614,
+                                    "TSQUERY": 3615,
+                                    "GTSVECTOR": 3642,
+                                    "REGCONFIG": 3734,
+                                    "REGDICTIONARY": 3769,
+                                    "JSONB": 3802,
+                                    "REGNAMESPACE": 4089,
+                                    "REGROLE": 4096
+                                }
+                            },
+                            "text": {},
+                            "binary": {}
+                        },
+                        "RowCtor": null,
+                        "rowAsArray": false
+                    }
+      tags:
+        - Product Details
