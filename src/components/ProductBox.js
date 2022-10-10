@@ -1,45 +1,70 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const ProductBox = () => {
-    
-    const [allProductData, setAllProductData] = React.useState([])
-    const [tshirtImage, setTshirtImage] = React.useState([]);
-    const [hoodieImage, setHoodieImage] = React.useState([])
+  const [allProductData, setAllProductData] = React.useState([]);
+  const [tshirtImage, setTshirtImage] = React.useState([]);
+  const [hoodieImage, setHoodieImage] = React.useState([]);
 
-    // console.log(allProductData)
-    // console.log(hoodieImage)
-    
-    const getProductImages = async () => {
-        try{
-            const response = await fetch(`${process.env.REACT_APP_ORIGIN}/api/products`);
-            const jsonData = await response.json();
+  // console.log(allProductData)
+  // console.log(hoodieImage)
 
-            setTshirtImage(jsonData[0].image2);
-            setHoodieImage(jsonData[1].image2);
-            setAllProductData(jsonData);
-        } catch (err) {
-            console.error(err.message)
+  const getProductImages = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_ORIGIN}/api/products`,
+        {
+          withCredentials: true,
         }
-    };
+      );
 
-    useEffect(() => {
-        getProductImages();
-    }, []);
+      const { data: jsonData } = response;
 
-    const delay = () => {
-        if (allProductData.length > 0) {
-            return true
-        } 
+      setTshirtImage(jsonData[0].image2);
+      setHoodieImage(jsonData[1].image2);
+      setAllProductData(jsonData);
+    } catch (err) {
+      console.error(err.message);
     }
+  };
 
-    return (
-    <div className='product-box'>
-        {delay() && <Link to={`products/${allProductData[0].product_name}`}> <img alt='' src={tshirtImage} className='grey-tshirt' data-test='grey-tshirt-image'/></Link>}
-        {delay() && <Link to={`products/${allProductData[1].product_name}`}> <img alt='' src={hoodieImage} className='grey-tshirt' data-test='grey-hoodie-image'/></Link>}
+  useEffect(() => {
+    getProductImages();
+  }, []);
+
+  const delay = () => {
+    if (allProductData.length > 0) {
+      return true;
+    }
+  };
+
+  return (
+    <div className="product-box">
+      {delay() && (
+        <Link to={`products/${allProductData[0].product_name}`}>
+          {" "}
+          <img
+            alt=""
+            src={tshirtImage}
+            className="grey-tshirt"
+            data-test="grey-tshirt-image"
+          />
+        </Link>
+      )}
+      {delay() && (
+        <Link to={`products/${allProductData[1].product_name}`}>
+          {" "}
+          <img
+            alt=""
+            src={hoodieImage}
+            className="grey-tshirt"
+            data-test="grey-hoodie-image"
+          />
+        </Link>
+      )}
     </div>
-  )
-}
+  );
+};
 
-
-export default ProductBox
+export default ProductBox;

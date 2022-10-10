@@ -7,7 +7,7 @@ const ProductPage = () => {
     // console.log(params)
     
     const navigate = useNavigate();
-    const [sizeAlert, setSizeAlert] = React.useState(false)
+    // const [sizeAlert, setSizeAlert] = React.useState(false)
     const [productData, setProductData] = React.useState({
         size: "",
         quantity: 1,
