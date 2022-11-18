@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 // const cookieParser = require("cookie-parser");
 const pool = require("./db");
 const queries = require("./queries");
-const stripe = require('stripe')(process.env.STRIPE_KEY)
+// const stripe = require('stripe')(process.env.STRIPE_KEY)
 
 const pgPool = new pg.Pool({
   user: process.env.USER,
@@ -49,7 +49,8 @@ app.use(
 app.use((req, res, next) => {
   pool.query(queries.sessionQueries.checkSession)
     .then((sessionExists) => {
-      // console.log(sessionExists.rows);
+      console.log(sessionExists.rows);
+      console.log(req)
       if (!sessionExists.rows.length) {
         req.session.isAuth = true;
         const { session } = req;

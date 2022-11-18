@@ -67,16 +67,17 @@ const ShoppingCart = () => {
                     image: dbProduct.image3,
                     size: size,
                     quantity: itemsFromCart[size].quantity,
-                    totalItemPrice: parseInt(dbProduct.unit_price) * parseInt(itemsFromCart[size].quantity)
+                    totalItemPrice: parseInt(dbProduct.unit_price) * parseInt(itemsFromCart[size].quantity),
+                    stripeId: dbProduct.stripe_item_id
                 }
             )
         }
     };
     let grandTotal;
-    if(finalOutput){
+    if (finalOutput) {
         grandTotal = finalOutput.reduce((grandTotal, currentValue) => grandTotal + currentValue.totalItemPrice, 0)
     }
-    
+
 
     try {
         console.log(finalOutput)
@@ -93,6 +94,7 @@ const ShoppingCart = () => {
                     image={item.image}
                     totalItemPrice={item.totalItemPrice}
                     id={item.id}
+                    stripeId={item.stripeId}
                 />
             )
         })
@@ -103,6 +105,21 @@ const ShoppingCart = () => {
     // console.log(cartArray);
     // console.log(allProductData);
 
+    const checkout = async () => {
+        console.log(finalOutput)
+        let body = finalOutput
+        console.log(body)
+        const response = await axios.post(`${process.env.REACT_APP_ORIGIN}/api/checkout`, body,
+            {
+                withCredentials: true,
+            }
+        );
+        console.log(response)
+        if(response.data.url) {
+            window.location.assign(response.data.url)
+        }
+    };
+
     return (
         <div className='shopping-cart'>
             <h2>Shopping Cart</h2>
@@ -112,7 +129,7 @@ const ShoppingCart = () => {
                     <p>Subtotal</p>
                     {finalOutput && <p>${grandTotal}.00</p>}
                 </div>
-                <div className='checkout'>
+                <div className='checkout' onClick={checkout}>
                     <p className='checkout-text'>Checkout</p>
                 </div>
             </div>}
@@ -121,4 +138,4 @@ const ShoppingCart = () => {
     )
 }
 
-export default ShoppingCart
+export default ShoppingCart;

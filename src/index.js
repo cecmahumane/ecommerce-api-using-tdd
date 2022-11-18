@@ -7,6 +7,8 @@ import Register from './components/Register';
 import ProductBox from './components/ProductBox';
 import ProductPage from './components/ProductPage';
 import ShoppingCart from './components/ShoppingCart';
+import CheckoutCancelPage from './components/CheckoutCancelPage';
+import CheckoutSuccessPage from './components/CheckoutSuccessPage'; 
 // import Product from './components/Product';
 // import Redirect from './components/Redirect';
 import reportWebVitals from './reportWebVitals';
@@ -18,6 +20,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="success" element={<CheckoutSuccessPage />} />
+          <Route path="cancel" element={<CheckoutCancelPage />} />
           <Route path="login" element={<Login />} />
           <Route path="cart" element={<ShoppingCart />} />
           <Route path="register" element={<Register />} />
