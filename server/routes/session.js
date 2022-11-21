@@ -4,7 +4,7 @@ const queries = require("../queries");
 const pool = require("../db");
 
 // GET individual product's details
-sessionRouter.get("/", async (req, res, next) => {
+sessionRouter.post("/", async (req, res, next) => {
     try {
         const data = await pool.query(queries.sessionQueries.checkSession);
         console.log("Session fetched from session route");
