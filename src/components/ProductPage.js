@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
-import axios from "axios";
+import networkManager from '../utilities/NetworkManager';
 
 const ProductPage = () => {
     const params = useParams();
@@ -20,11 +20,8 @@ const ProductPage = () => {
 
     const getProductData = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_ORIGIN}/api/products/${params.product}`,
-                {
-                    withCredentials: true,
-                });
-            //   console.log(response);
+            const response = await networkManager.getSingleProductData(params);
+            console.log(response);
             return response.data;
         } catch (err) {
             console.error(err.message)
@@ -39,31 +36,28 @@ const ProductPage = () => {
             }
             setSizeAlert(false);
             if (!sessCart) {
-            const newItemResponse = await axios.post(`${process.env.REACT_APP_ORIGIN}/api/cart`, body, { withCredentials: true });
-            if(newItemResponse.status === 201) {
-                console.log("First item successfully added to cart");
-                // console.log(newItemResponse)
-            }
-            // console.log(newItemResponse);
-            return setSessCart(newItemResponse);
+                const newItemResponse = await networkManager.addNewItemToCart(body)
+                if (newItemResponse.status === 201) {
+                    console.log("First item successfully added to cart");
+                    // console.log(newItemResponse)
+                }
+                // console.log(newItemResponse);
+                return setSessCart(newItemResponse);
             }
         } catch (err) {
             console.error(err.message);
         }
         try {
-            body = {productData, sessCart}
-            const response = await axios.get(`${process.env.REACT_APP_ORIGIN}/api/products/${params.product}`,
-                    {
-                        withCredentials: true,
-                    });
-                let productId = response.data.rows[0].id;
-                // console.log(productId);
-            
+            body = { productData, sessCart }
+            const response = await networkManager.getSingleProductData(params);
+            let productId = response.data.rows[0].id;
+            // console.log(productId);
+
             // console.log(body);
-            if (!(productId in sessCart.data.cart)) {  
-                console.log("Item currently not present in cart")  
-                const newItemIdResponse = await axios.put(`${process.env.REACT_APP_ORIGIN}/api/cart/addNewItem`, body, { withCredentials: true });
-                if(newItemIdResponse.status === 201) {
+            if (!(productId in sessCart.data.cart)) {
+                console.log("Item currently not present in cart")
+                const newItemIdResponse = await networkManager.addNewItem(body)
+                if (newItemIdResponse.status === 201) {
                     console.log("New item successfully added to cart");
                     console.log(newItemIdResponse);
                     return setSessCart(newItemIdResponse);
@@ -73,30 +67,27 @@ const ProductPage = () => {
             console.log(error)
         }
         try {
-            body = {productData}
-            const response = await axios.get(`${process.env.REACT_APP_ORIGIN}/api/products/${params.product}`,
-                    {
-                        withCredentials: true,
-                    });
-                let productId = response.data.rows[0].id;
-                // console.log(productId);
-            
+            body = { productData }
+            const response = await networkManager.getSingleProductData(params);
+            let productId = response.data.rows[0].id;
+            // console.log(productId);
+
             // console.log(body);
             if (productId in sessCart.data.cart) {
                 console.log(sessCart.data.cart)
                 if (productData.size in sessCart.data.cart[productId]) {
                     console.log('Same size + 1')
-                    const sameItemSizeResponse = await axios.put(`${process.env.REACT_APP_ORIGIN}/api/cart/addOneToSize`, body, { withCredentials: true });
-                    if(sameItemSizeResponse.status === 201) {
+                    const sameItemSizeResponse = await networkManager.addOneToSize(body)
+                    if (sameItemSizeResponse.status === 201) {
                         console.log("Same size successfully added to cart");
                         console.log(sameItemSizeResponse);
                         return setSessCart(sameItemSizeResponse);
                     };
 
                 }
-                console.log("Item size currently not present in cart")  
-                const newItemIdSizeResponse = await axios.put(`${process.env.REACT_APP_ORIGIN}/api/cart/addNewSize`, body, { withCredentials: true });
-                if(newItemIdSizeResponse.status === 201) {
+                console.log("Item size currently not present in cart")
+                const newItemIdSizeResponse = await networkManager.addNewSize(body);
+                if (newItemIdSizeResponse.status === 201) {
                     console.log("New item size successfully added to cart");
                     console.log(newItemIdSizeResponse);
                     return setSessCart(newItemIdSizeResponse);
@@ -106,7 +97,7 @@ const ProductPage = () => {
             console.log(error)
         }
         try {
-            
+
         } catch (error) {
             console.log(error)
         }

@@ -49,8 +49,8 @@ app.use(
 app.use((req, res, next) => {
   pool.query(queries.sessionQueries.checkSession)
     .then((sessionExists) => {
-      console.log(sessionExists.rows);
-      console.log(req)
+      // console.log(sessionExists.rows);
+      // console.log(req)
       if (!sessionExists.rows.length) {
         req.session.isAuth = true;
         const { session } = req;

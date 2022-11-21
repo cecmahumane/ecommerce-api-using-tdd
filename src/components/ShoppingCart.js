@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import CartItem from './CartItem';
 import { useOutletContext } from 'react-router-dom'
-import axios from 'axios';
 import { nanoid } from 'nanoid';
+import networkManager from '../utilities/NetworkManager';
 
 const ShoppingCart = () => {
     const [sessCart, setSessCart] = useOutletContext();
@@ -25,11 +25,7 @@ const ShoppingCart = () => {
         let body = cartArray;
         console.log(body);
         try {
-            const response = await axios.post(`${process.env.REACT_APP_ORIGIN}/api/products/match`, body,
-                {
-                    withCredentials: true,
-                }
-            );
+            const response = await networkManager.getProductMatches(body);
 
             console.log(response.data);
             formatItemList(response.data)
@@ -109,11 +105,7 @@ const ShoppingCart = () => {
         console.log(finalOutput)
         let body = finalOutput
         console.log(body)
-        const response = await axios.post(`${process.env.REACT_APP_ORIGIN}/api/checkout`, body,
-            {
-                withCredentials: true,
-            }
-        );
+        const response = await networkManager.checkout(body);
         console.log(response)
         if(response.data.url) {
             window.location.assign(response.data.url)

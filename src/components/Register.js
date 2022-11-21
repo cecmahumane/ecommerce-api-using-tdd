@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
-import axios from "axios";
+import networkManager from '../utilities/NetworkManager';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,25 +15,25 @@ const Register = () => {
   });
   // console.log(registerData)
 
-  const getSessionData = async () => {
-    console.log("call entered")
-    try{
-        const response = await axios.get(`${process.env.REACT_APP_ORIGIN}/api/session`,
-        {
-            withCredentials: true
-          });
-          console.log("register component Session")
-          console.log(response);
-        return response.data;
-    } catch (err) {
-        console.error(err.message)
-    }
-  };
+  // const getSessionData = async () => {
+  //   console.log("call entered")
+  //   try{
+  //       const response = await axios.get(`${process.env.REACT_APP_ORIGIN}/api/session`,
+  //       {
+  //           withCredentials: true
+  //         });
+  //         console.log("register component Session")
+  //         console.log(response);
+  //       return response.data;
+  //   } catch (err) {
+  //       console.error(err.message)
+  //   }
+  // };
 
-  useEffect(() => {
-    getSessionData();
-    console.log("getSession run")
-  }, []);
+  // useEffect(() => {
+  //   getSessionData();
+  //   console.log("getSession run")
+  // }, []);
 
   const submitData = async (event) => {
     event.preventDefault();
@@ -41,7 +41,7 @@ const Register = () => {
       if (registerData.password === registerData.confirmPassword) {
         try {
           const body = registerData;
-          const response = await axios.post(`${process.env.REACT_APP_ORIGIN}/api/profile`, body, {withCredentials: true});
+          const response = await networkManager.submitData(body);
           if (response.status === 409) {
             return setExistingEmail(true);
           }

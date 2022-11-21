@@ -5,7 +5,7 @@ const shoppingCartRouter = express.Router();
 
 // Increment shopping cart item
 shoppingCartRouter.put("/plus", async (req, res, next) => {
-    const { size, quantity, id} = req.body
+    const { size, id} = req.body
     try {
         console.log('++++++')
         req.session.cart[id][size].quantity++; 
@@ -18,7 +18,7 @@ shoppingCartRouter.put("/plus", async (req, res, next) => {
 
 // Decrement shopping cart item
 shoppingCartRouter.put("/minus", async (req, res, next) => {
-    const { size, quantity, id} = req.body
+    const { size, id} = req.body
     try {
         console.log('-----')
         req.session.cart[id][size].quantity--; 
@@ -31,7 +31,7 @@ shoppingCartRouter.put("/minus", async (req, res, next) => {
 
 // Remove shopping cart item
 shoppingCartRouter.put("/remove", async (req, res, next) => {
-    const { size, quantity, id} = req.body
+    const { size, id} = req.body
     try {
         console.log('remove')
         if (!req.session.cart[id][size]) {

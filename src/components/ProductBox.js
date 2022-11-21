@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import networkManager from "../utilities/NetworkManager";
 
 const ProductBox = () => {
   const [allProductData, setAllProductData] = React.useState([]);
@@ -12,12 +12,8 @@ const ProductBox = () => {
 
   const getProductImages = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_ORIGIN}/api/products`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await networkManager.getProductImages()
+      console.log(response)
 
       const { data: jsonData } = response;
 

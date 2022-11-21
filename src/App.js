@@ -6,6 +6,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import React, { useEffect } from 'react';
 import axios from 'axios';
 // import ProductPage from './components/ProductPage';
+import NetworkManager from './utilities/NetworkManager';
 
 const queryClient = new QueryClient()
 

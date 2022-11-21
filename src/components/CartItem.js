@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import axios from 'axios';
+import networkManager from '../utilities/NetworkManager';
 
 const CartItem = (props) => {
     
@@ -10,7 +11,7 @@ const CartItem = (props) => {
                 quantity: props.quantity,
                 id: props.id
             };
-            const incrementItem = await axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/plus`, body, { withCredentials: true });
+            const incrementItem = await networkManager.incrementCartItem(body);
             console.log(incrementItem);
             props.setSessCart(incrementItem);
         } 
@@ -23,7 +24,7 @@ const CartItem = (props) => {
                 quantity: props.quantity,
                 id: props.id
             };
-            const decrementItem = await axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/minus`, body, { withCredentials: true });
+            const decrementItem = await networkManager.decrementCartItem(body);
             console.log(decrementItem);
             props.setSessCart(decrementItem);
         } 
@@ -35,7 +36,7 @@ const CartItem = (props) => {
             quantity: props.quantity,
             id: props.id
         };
-        const removeItem = await axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/remove`, body, { withCredentials: true });
+        const removeItem = await networkManager.removeItemFromCart(body);
         console.log(removeItem);
         props.setSessCart(removeItem);
     }
