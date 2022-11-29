@@ -41,7 +41,8 @@ const Register = () => {
       if (registerData.password === registerData.confirmPassword) {
         try {
           const body = registerData;
-          const response = await networkManager.submitData(body);
+          // const response = await networkManager.submitData(body);
+          const response = await networkManager.makeRequest("submit_data", body);
           if (response.status === 409) {
             return setExistingEmail(true);
           }

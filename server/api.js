@@ -5,7 +5,7 @@ const pgSession = require("connect-pg-simple")(session);
 const pg = require("pg");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-// const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const pool = require("./db");
 const queries = require("./queries");
 // const stripe = require('stripe')(process.env.STRIPE_KEY)
@@ -28,9 +28,10 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cookieParser());
+app.use(cookieParser());
 //Add middleware for parsing request bodies
 app.use(bodyParser.json());
+
 app.use(
   session({
     store: new pgSession({
@@ -50,7 +51,7 @@ app.use((req, res, next) => {
   pool.query(queries.sessionQueries.checkSession)
     .then((sessionExists) => {
       // console.log(sessionExists.rows);
-      // console.log(req)
+      console.log(req.cookies['connect.sid'])
       if (!sessionExists.rows.length) {
         req.session.isAuth = true;
         const { session } = req;

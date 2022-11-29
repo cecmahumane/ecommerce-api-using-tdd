@@ -20,7 +20,8 @@ const ProductPage = () => {
 
     const getProductData = async () => {
         try {
-            const response = await networkManager.getSingleProductData(params);
+            // const response = await networkManager.getSingleProductData(params);
+            const response = await networkManager.makeRequest("get_single_product_data", params);
             console.log(response);
             return response.data;
         } catch (err) {
@@ -36,7 +37,8 @@ const ProductPage = () => {
             }
             setSizeAlert(false);
             if (!sessCart) {
-                const newItemResponse = await networkManager.addNewItemToCart(body)
+                // const newItemResponse = await networkManager.addNewItemToCart(body)
+                const newItemResponse = await networkManager.makeRequest("add_new_item_to_cart", body);
                 if (newItemResponse.status === 201) {
                     console.log("First item successfully added to cart");
                     // console.log(newItemResponse)
@@ -49,14 +51,16 @@ const ProductPage = () => {
         }
         try {
             body = { productData, sessCart }
-            const response = await networkManager.getSingleProductData(params);
+            // const response = await networkManager.getSingleProductData(params);
+            const response = await networkManager.makeRequest("get_single_product_data", params);
             let productId = response.data.rows[0].id;
             // console.log(productId);
 
             // console.log(body);
             if (!(productId in sessCart.data.cart)) {
                 console.log("Item currently not present in cart")
-                const newItemIdResponse = await networkManager.addNewItem(body)
+                // const newItemIdResponse = await networkManager.addNewItem(body);
+                const newItemIdResponse = await networkManager.makeRequest("add_new_item", body);
                 if (newItemIdResponse.status === 201) {
                     console.log("New item successfully added to cart");
                     console.log(newItemIdResponse);
@@ -69,6 +73,7 @@ const ProductPage = () => {
         try {
             body = { productData }
             const response = await networkManager.getSingleProductData(params);
+            // const response = await networkManager.makeRequest("get_single_product_data", params);
             let productId = response.data.rows[0].id;
             // console.log(productId);
 
@@ -77,7 +82,8 @@ const ProductPage = () => {
                 console.log(sessCart.data.cart)
                 if (productData.size in sessCart.data.cart[productId]) {
                     console.log('Same size + 1')
-                    const sameItemSizeResponse = await networkManager.addOneToSize(body)
+                    // const sameItemSizeResponse = await networkManager.addOneToSize(body)
+                    const sameItemSizeResponse = await networkManager.makeRequest("add_one_to_size", body);
                     if (sameItemSizeResponse.status === 201) {
                         console.log("Same size successfully added to cart");
                         console.log(sameItemSizeResponse);
@@ -86,7 +92,8 @@ const ProductPage = () => {
 
                 }
                 console.log("Item size currently not present in cart")
-                const newItemIdSizeResponse = await networkManager.addNewSize(body);
+                // const newItemIdSizeResponse = await networkManager.addNewSize(body);
+                const newItemIdSizeResponse = await networkManager.makeRequest("add_new_size", body);
                 if (newItemIdSizeResponse.status === 201) {
                     console.log("New item size successfully added to cart");
                     console.log(newItemIdSizeResponse);

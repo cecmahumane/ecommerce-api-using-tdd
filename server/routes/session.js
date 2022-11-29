@@ -3,7 +3,6 @@ const sessionRouter = express.Router();
 const queries = require("../queries");
 const pool = require("../db");
 
-// GET individual product's details
 sessionRouter.post("/", async (req, res, next) => {
     try {
         const data = await pool.query(queries.sessionQueries.checkSession);

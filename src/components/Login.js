@@ -4,23 +4,6 @@ import axios from "axios"
 
 const Login = (props) => {
 
-    // const getSessionData = async () => {
-    //     try {
-    //         const response = await axios.get(`${process.env.REACT_APP_ORIGIN}/api/session/`,
-    //             {
-    //                 withCredentials: true,
-    //             });
-    //         console.log(response);
-    //         return response.data;
-    //     } catch (err) {
-    //         console.error(err.message)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getSessionData();
-    // },[])
-
     return (
         <div className='login' data-test="login" >
             <div className='profile-image' data-test='profile-image'></div>

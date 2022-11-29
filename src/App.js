@@ -6,32 +6,21 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import React, { useEffect } from 'react';
 import axios from 'axios';
 // import ProductPage from './components/ProductPage';
-import NetworkManager from './utilities/NetworkManager';
+import Cookies from 'universal-cookie';
+import networkManager from './utilities/NetworkManager';
 
 const queryClient = new QueryClient()
+const cookies = new Cookies();
 
 function App() {
   const [sessCart, setSessCart] = React.useState("");
   // const [allProductData, setAllProductData] = React.useState("");
   console.log(sessCart);
 
-  // let resumeCart = async () => {
-  //   let body = sessCart;
-  //   let response = await axios.post(`${process.env.REACT_APP_ORIGIN}/api/session`, body,
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   )
-  //   console.log(response);
-  //   setSessCart(response)
+  // networkManager.addRequired();
 
-  // };
-  
-
-  //   useEffect(() => {
-  //     resumeCart();
-  // }, [sessCart]);
-  // resumeCart();
+  // const cookies = new Cookies();
+  console.log(cookies.getAll())
 
   return (
     <div className="app">

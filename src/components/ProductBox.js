@@ -12,7 +12,8 @@ const ProductBox = () => {
 
   const getProductImages = async () => {
     try {
-      const response = await networkManager.getProductImages()
+      // const response = await networkManager.getProductImages();
+      const response = await networkManager.makeRequest("get_product_images", null)
       console.log(response)
 
       const { data: jsonData } = response;

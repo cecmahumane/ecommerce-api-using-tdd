@@ -11,7 +11,7 @@ const CartItem = (props) => {
                 quantity: props.quantity,
                 id: props.id
             };
-            const incrementItem = await networkManager.incrementCartItem(body);
+            const incrementItem = await networkManager.makeRequest("increment_cart_item", body);
             console.log(incrementItem);
             props.setSessCart(incrementItem);
         } 
@@ -24,7 +24,7 @@ const CartItem = (props) => {
                 quantity: props.quantity,
                 id: props.id
             };
-            const decrementItem = await networkManager.decrementCartItem(body);
+            const decrementItem = await networkManager.makeRequest("decrement_cart_item", body);
             console.log(decrementItem);
             props.setSessCart(decrementItem);
         } 
@@ -36,7 +36,7 @@ const CartItem = (props) => {
             quantity: props.quantity,
             id: props.id
         };
-        const removeItem = await networkManager.removeItemFromCart(body);
+        const removeItem = await networkManager.makeRequest("remove_item_from_cart", body);
         console.log(removeItem);
         props.setSessCart(removeItem);
     }
