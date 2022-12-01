@@ -36,10 +36,12 @@ const ShoppingCart = () => {
     };
 
     useEffect(() => {
+        if (sessCart.data) {
         itemId(sessCart.data.cart);
         // if (matchedProductData) {
         //     formatItemList();
         // }
+        }
     }, [sessCart]);
 
     let output = [];
@@ -115,11 +117,11 @@ const ShoppingCart = () => {
     return (
         <div className='shopping-cart'>
             <h2>Shopping Cart</h2>
-            {finalOutput && itemList}
+            {finalOutput.length > 0 && itemList}
             {finalOutput.length > 0 && <div>
                 <div className='subtotal-price'>
                     <p>Subtotal</p>
-                    {finalOutput && <p>${grandTotal}.00</p>}
+                    {finalOutput.length > 0 && <p>${grandTotal}.00</p>}
                 </div>
                 <div className='checkout' onClick={checkout}>
                     <p className='checkout-text'>Checkout</p>

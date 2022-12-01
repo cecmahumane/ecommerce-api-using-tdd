@@ -22,7 +22,8 @@ class usersProductsQueriesClass{
 
 class sessionQueriesClass{
     checkSession = "SELECT * FROM session";
-    addSessionCartItem = "UPDATE session SET sess = $1"
+    addSessionCartItem = "UPDATE session SET sess = $1";
+    fetchCookieSession = "SELECT * FROM session WHERE session.sid = $1";
 }
 
 const sessionQueries = new sessionQueriesClass();
