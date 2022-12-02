@@ -51,14 +51,9 @@ app.use((req, res, next) => {
   pool.query(queries.sessionQueries.checkSession)
     .then((sessionExists) => {
       // console.log(sessionExists.rows);
-      // console.log(req.cookies['connect.sid'])
-      // if (req.cookies['connect.sid']) {
-      //   const slicedCookieId = req.cookies['connect.sid'].slice(2);
-      //   console.log(slicedCookieId);
-      // }
-
+    
       if (!sessionExists.rows.length) {
-        req.session.isAuth = true;
+        // req.session.cart = {};
         const { session } = req;
         // console.log("Session created", session);
         // console.log(sessionExists)

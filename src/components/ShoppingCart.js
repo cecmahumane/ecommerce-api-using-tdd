@@ -25,7 +25,7 @@ const ShoppingCart = () => {
         let body = cartArray;
         console.log(body);
         try {
-            const response = await networkManager.getProductMatches(body);
+            const response = await networkManager.makeRequest("get_product_matches", body)
 
             console.log(response.data);
             formatItemList(response.data)
@@ -107,7 +107,8 @@ const ShoppingCart = () => {
         console.log(finalOutput)
         let body = finalOutput
         console.log(body)
-        const response = await networkManager.checkout(body);
+        // const response = await networkManager.checkout(body);
+        const response = await networkManager.makeRequest("checkout", body);
         console.log(response)
         if(response.data.url) {
             window.location.assign(response.data.url)

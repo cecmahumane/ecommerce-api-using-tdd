@@ -10,17 +10,26 @@ import Cookies from 'universal-cookie';
 import networkManager from './utilities/NetworkManager';
 
 const queryClient = new QueryClient()
-const cookies = new Cookies();
+// const cookies = new Cookies();
 
 function App() {
   const [sessCart, setSessCart] = React.useState("");
-  // const [allProductData, setAllProductData] = React.useState("");
   console.log(sessCart);
 
-  // networkManager.addRequired();
+  const fetchCookieSession = async () => {
+    try {
+      const response = await networkManager.makeRequest("fetch_cookie_session", null)
+      console.log(response)
+      setSessCart(response);
+      console.log("fetch cookie session complete")
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
-  // const cookies = new Cookies();
-  console.log(cookies.getAll())
+  useEffect(() => {
+    fetchCookieSession();
+  }, []);
 
   return (
     <div className="app">

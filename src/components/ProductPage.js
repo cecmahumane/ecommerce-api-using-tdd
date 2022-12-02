@@ -57,6 +57,7 @@ const ProductPage = () => {
             // console.log(productId);
 
             // console.log(body);
+            console.log(sessCart);
             if (!(productId in sessCart.data.cart)) {
                 console.log("Item currently not present in cart")
                 // const newItemIdResponse = await networkManager.addNewItem(body);
@@ -72,8 +73,8 @@ const ProductPage = () => {
         }
         try {
             body = { productData }
-            const response = await networkManager.getSingleProductData(params);
-            // const response = await networkManager.makeRequest("get_single_product_data", params);
+            // const response = await networkManager.getSingleProductData(params);
+            const response = await networkManager.makeRequest("get_single_product_data", params);
             let productId = response.data.rows[0].id;
             // console.log(productId);
 
