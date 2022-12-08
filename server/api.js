@@ -53,7 +53,7 @@ app.use((req, res, next) => {
       // console.log(sessionExists.rows);
     
       if (!sessionExists.rows.length) {
-        // req.session.cart = {};
+        req.session.cart = {};
         const { session } = req;
         // console.log("Session created", session);
         // console.log(sessionExists)

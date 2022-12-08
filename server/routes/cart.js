@@ -49,7 +49,7 @@ cartRouter.put('/addNewItem', async (req, res, next) => {
     } catch (error) {
         console.log(error)
     }
-
+    console.log(req.session);
     try {
         req.session.cart[cartProductNumber] = {
             [size]: {
