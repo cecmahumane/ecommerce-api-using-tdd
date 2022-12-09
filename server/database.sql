@@ -33,9 +33,9 @@ CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 
 INSERT INTO products(product_name, unit_price, quantity_small, quantity_med, quantity_large, image1, image2, image3)
-VALUES ('T-Shirt', 35.00, 25, 25, 25, '/images/Tshirt.jpg', '/images/Greytshirt.png', '/images/Cart-sized-tshirt.png');
+VALUES ('T-Shirt', 35, 25, 25, 25, '/images/Tshirt.jpg', '/images/Greytshirt.png', '/images/Cart-sized-tshirt.png');
 INSERT INTO products(product_name, unit_price, quantity_small, quantity_med, quantity_large, image1, image2, image3)
-VALUES ('Hoodie', 49.00, 25, 25, 25, '/images/Hoodie.jpg', '/images/Greyhoodie.png', '/images/Cart-sized-hoodie.png');   
+VALUES ('Hoodie', 49, 25, 25, 25, '/images/Hoodie.jpg', '/images/Greyhoodie.png', '/images/Cart-sized-hoodie.png');   
 
 UPDATE products SET product_description ='<h2 data-test="title">Classic</h2>
                                           <p data-test="price">$35.00</p>

@@ -55,7 +55,7 @@ const CartItem = (props) => {
                     <div>
                         <p>{props.productName}</p>
                         <p>{props.size}</p>
-                        <p>{props.price}</p>
+                        <p>${props.price}.00</p>
                     </div>
                 </div>
                 <div className='quantity-price'>

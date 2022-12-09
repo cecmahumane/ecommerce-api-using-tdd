@@ -11,6 +11,7 @@ checkoutRouter.post("/", async (req, res, next) => {
     //#########################
     let lineItems = [];
     items.forEach((item) => {
+        let nonDecimalPrice = item.price * 100;
         lineItems.push(
             {
                 price_data: {
@@ -19,7 +20,7 @@ checkoutRouter.post("/", async (req, res, next) => {
                       description: item.size,
                       images: [`PUBLIC_URL${item.image}`]
                     }, 
-                    unit_amount_decimal: item.price,
+                    unit_amount: nonDecimalPrice,
                     currency: 'cad'
                 },
                 quantity: item.quantity
