@@ -41,6 +41,8 @@ const networkManager = {
         "remove_item_from_cart": (body) => {return axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/remove`, body, {withCredentials: true})},
 
         "fetch_cookie_session": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/session`, {withCredentials: true})},
+
+        "empty_cart": (body) => {return axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/emptyCart`, body, {withCredentials: true})}
     }
 };
 

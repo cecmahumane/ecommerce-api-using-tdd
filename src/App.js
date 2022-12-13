@@ -28,6 +28,7 @@ function App() {
   };
 
   useEffect(() => {
+    console.log("app.js refresh")
     fetchCookieSession();
   }, []);
 

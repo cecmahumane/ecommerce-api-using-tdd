@@ -10,7 +10,7 @@ shoppingCartRouter.put("/plus", async (req, res, next) => {
         console.log('++++++')
         req.session.cart[id][size].quantity++; 
         console.log('++++++')
-        return res.status(201).send(req.session);
+        return res.status(200).send(req.session);
     } catch (error) {
         console.log(error)
     }
@@ -23,7 +23,7 @@ shoppingCartRouter.put("/minus", async (req, res, next) => {
         console.log('-----')
         req.session.cart[id][size].quantity--; 
         console.log('-----')
-        return res.status(201).send(req.session);
+        return res.status(200).send(req.session);
     } catch (error) {
         console.log(error)
     }
@@ -39,11 +39,22 @@ shoppingCartRouter.put("/remove", async (req, res, next) => {
         }
         delete req.session.cart[id][size];
         console.log('remove')
-        return res.status(201).send(req.session);
+        return res.status(200).send(req.session);
     } catch (error) {
         console.log(error)
     }
 });
 
+shoppingCartRouter.put("/emptyCart", async (req, res) => {
+    try {
+        if (req.session.cart) {
+            delete req.session.cart;
+            req.session.cart = {};
+            return res.status(200).send(req.session);
+        }
+    } catch (error) {
+        
+    }
+});
 
 module.exports = shoppingCartRouter;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import CartItem from './CartItem';
-import { useOutletContext } from 'react-router-dom'
+import { useLocation, useOutletContext } from 'react-router-dom'
 import { nanoid } from 'nanoid';
 import networkManager from '../utilities/NetworkManager';
 
@@ -9,6 +9,8 @@ const ShoppingCart = () => {
     // const [cartArray, setCartArray] = React.useState([]);
     const [finalOutput, setFinalOutput] = React.useState([]);
     console.log(sessCart);
+
+    // let location = useLocation();
 
     let itemId = async (carts) => {
         let cartArr = [];
@@ -19,7 +21,6 @@ const ShoppingCart = () => {
         // setCartArray(cartArr);
         await getProductMatches(cartArr);
     };
-
 
     const getProductMatches = async (cartArray) => {
         let body = cartArray;
@@ -36,26 +37,33 @@ const ShoppingCart = () => {
     };
 
     useEffect(() => {
+        // setFinalOutput([]);
         if (sessCart.data) {
         itemId(sessCart.data.cart);
-        // if (matchedProductData) {
-        //     formatItemList();
-        // }
+        console.log('useEffect Triggered');
+        console.log(sessCart);
         }
+        
     }, [sessCart]);
 
     let output = [];
     let formatItemList = (matchedProductData) => {
         matchedProductData.forEach(dbItem => {
             let cartItem = sessCart.data.cart[dbItem.id];
-            sizeInCartItem(cartItem, output, dbItem)
+            // if(finalOutput.length < 1) {
+            //setFinalOutput(sizeInCartItem(cartItem, dbItem)) //sizeInCartItem(cartItem, output, dbItem)
+            // }
+            // setFinalOutput((prevState) => [...prevState, ...sizeInCartItem(cartItem, dbItem)])
+            output.push(...sizeInCartItem(cartItem, dbItem))
         })
-        // console.log(output);
+
+        console.log(output);
         setFinalOutput(output)
         // return output;
     }
 
-    let sizeInCartItem = (itemsFromCart, arr, dbProduct) => {
+    let sizeInCartItem = (itemsFromCart, dbProduct) => {
+        let arr = [];
         for (const size in itemsFromCart) {
             arr.push(
                 {
@@ -70,8 +78,12 @@ const ShoppingCart = () => {
                 }
             )
         }
+        console.log(arr)
+        return arr;
     };
     let grandTotal;
+    console.log(finalOutput)
+
     if (finalOutput) {
         grandTotal = finalOutput.reduce((grandTotal, currentValue) => grandTotal + currentValue.totalItemPrice, 0)
     }
