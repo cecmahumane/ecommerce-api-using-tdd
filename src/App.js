@@ -14,7 +14,9 @@ const queryClient = new QueryClient()
 
 function App() {
   const [sessCart, setSessCart] = React.useState("");
+  const [finalOutput, setFinalOutput] = React.useState([])
   console.log(sessCart);
+  console.log(finalOutput);
 
   const fetchCookieSession = async () => {
     try {
@@ -37,7 +39,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Header cartInfo={sessCart} />
         <Outlet
-          context={[sessCart, setSessCart]}
+          context={[sessCart, setSessCart, finalOutput, setFinalOutput]}
         />
       </QueryClientProvider>
     </div>

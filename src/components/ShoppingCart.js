@@ -5,10 +5,11 @@ import { nanoid } from 'nanoid';
 import networkManager from '../utilities/NetworkManager';
 
 const ShoppingCart = () => {
-    const [sessCart, setSessCart] = useOutletContext();
+    const [sessCart, setSessCart, finalOutput, setFinalOutput] = useOutletContext();
     // const [cartArray, setCartArray] = React.useState([]);
-    const [finalOutput, setFinalOutput] = React.useState([]);
+    // const [finalOutput, setFinalOutput] = useOutletContext();
     console.log(sessCart);
+    console.log(finalOutput);
 
     // let location = useLocation();
 
@@ -115,8 +116,14 @@ const ShoppingCart = () => {
     // console.log(cartArray);
     // console.log(allProductData);
 
+    const outputToLocalStorage = () => {
+        const finalOutputJSON = JSON.stringify(finalOutput);
+        localStorage.setItem('finalOutput', finalOutputJSON);
+    };
+
     const checkout = async () => {
         console.log(finalOutput)
+        outputToLocalStorage();
         let body = finalOutput
         console.log(body)
         // const response = await networkManager.checkout(body);

@@ -20,6 +20,13 @@ CREATE TABLE IF NOT EXISTS products(
     image3 VARCHAR(255)
 );
 
+CREATE TABLE IF NOT EXISTS orders(
+  id SERIAL PRIMARY KEY,
+  order_contents VARCHAR(1000),
+  user_id INT,
+  CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
 CREATE TABLE IF NOT EXISTS "session" (
   "sid" varchar NOT NULL COLLATE "default",
   "sess" json NOT NULL,

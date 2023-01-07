@@ -42,9 +42,20 @@ const networkManager = {
 
         "fetch_cookie_session": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/session`, {withCredentials: true})},
 
-        "empty_cart": (body) => {return axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/emptyCart`, body, {withCredentials: true})}
+        "empty_cart": (body) => {return axios.put(`${process.env.REACT_APP_ORIGIN}/api/shoppingCart/emptyCart`, body, {withCredentials: true})},
+
+        "get_order_info": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/checkout/success`, {params: data}, {withCredentials: true})},
+
+        "create_checkout_profile": (body) => {return axios.post(`${process.env.REACT_APP_ORIGIN}/api/profile/checkoutProfile`, body, {withCredentials: true})},
+
+        "write_to_order_table": (body) => {return axios.post(`${process.env.REACT_APP_ORIGIN}/api/checkout/checkoutOrder`, body, {withCredentials: true})},
+
+        "get_user_id": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/profile/userId`, {withCredentials: true})},
+
+        "verify_login_data": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/profile/verifyUser`, {params: data},{withCredentials: true})},
+
     }
 };
 
 
-export default networkManager
+export default networkManager;
