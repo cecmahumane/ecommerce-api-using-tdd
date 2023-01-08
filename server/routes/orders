@@ -1,0 +1,20 @@
+const express = require("express");
+const pool = require("../db");
+const ordersRouter = express.Router();
+const queries = require("../queries");
+
+ordersRouter.get("/", async (req, res, next) => {
+    let email = req.query.email;
+    // let password = req.query.password;
+    try {
+        // console.log(req.params.id)
+        const retrievedOrder = await pool.query(queries.orderQueries.retrieveCustomerOrder, [email]);
+        console.log("retrieve order query run");
+        res.send(retrievedOrder);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
+
+module.exports = ordersRouter;

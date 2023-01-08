@@ -23,6 +23,7 @@ class usersProductsQueriesClass{
 
 class orderQueriesClass{
     insertOrder = "INSERT INTO orders(user_id, order_contents) VALUES ($1, $2)";
+    retrieveCustomerOrder = "SELECT orders.order_contents FROM orders INNER JOIN users ON users.id = orders.user_id WHERE users.email = $1";
 }
 
 class sessionQueriesClass{

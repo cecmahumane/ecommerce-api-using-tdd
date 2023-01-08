@@ -14,7 +14,11 @@ const queryClient = new QueryClient()
 
 function App() {
   const [sessCart, setSessCart] = React.useState("");
-  const [finalOutput, setFinalOutput] = React.useState([])
+  const [finalOutput, setFinalOutput] = React.useState([]);
+  const [loginData, setLoginData] = React.useState({
+    email: "",
+    password: ""
+});
   console.log(sessCart);
   console.log(finalOutput);
 
@@ -39,7 +43,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Header cartInfo={sessCart} />
         <Outlet
-          context={[sessCart, setSessCart, finalOutput, setFinalOutput]}
+          context={[sessCart, setSessCart, finalOutput, setFinalOutput, loginData, setLoginData]}
         />
       </QueryClientProvider>
     </div>

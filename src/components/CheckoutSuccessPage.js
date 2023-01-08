@@ -40,7 +40,7 @@ const CheckoutSuccessPage = () => {
       const response = await networkManager.makeRequest("empty_cart", body)
       setSessCart(response);
       localStorage.clear();
-      setFinalOutput([]);
+      // setFinalOutput([]);
     } catch (error) {
         console.log(error);
     }

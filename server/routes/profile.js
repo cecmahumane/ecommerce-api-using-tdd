@@ -98,7 +98,7 @@ profileRouter.get("/verifyUser", async (req, res, next) => {
     }
     try {
         if (await bcrypt.compare(submittedPassword, retrievedPasswordhash)) {
-            console.log("success")
+            console.log("successful user verification");
             return res.send(true)
         };
         res.send(false);

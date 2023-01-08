@@ -89,5 +89,7 @@ app.use("/api/session", sessionRouter);
 const checkoutRouter = require("../server/routes/checkout");
 app.use("/api/checkout", checkoutRouter);
 
+const ordersRouter = require("../server/routes/orders");
+app.use("/api/orders", ordersRouter);
 
 module.exports = app;

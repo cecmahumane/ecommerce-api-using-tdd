@@ -54,6 +54,8 @@ const networkManager = {
 
         "verify_login_data": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/profile/verifyUser`, {params: data},{withCredentials: true})},
 
+        "get_customer_order": (data) => {return axios.get(`${process.env.REACT_APP_ORIGIN}/api/orders`, {params: data}, {withCredentials: true})},
+
     }
 };
 

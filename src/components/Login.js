@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import axios from "axios"
 import networkManager from '../utilities/NetworkManager';
 
 const Login = () => {
     const [loginError, setLoginError] = React.useState(false);
-    const [loginData, setLoginData] = React.useState({
-        email: "",
-        password: ""
-    });
+    const [loginData, setLoginData] = useOutletContext();
     
     const navigate = useNavigate();
     
@@ -27,8 +24,8 @@ const Login = () => {
         try {
             const data = loginData;
             const response = await networkManager.makeRequest("verify_login_data", data);
-            console.log(response);
-            if (response) {
+            console.log(response.data);
+            if (response.data) {
                 setLoginError(false);
                 navigate('/orders');
             }
