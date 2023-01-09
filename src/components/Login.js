@@ -5,7 +5,7 @@ import networkManager from '../utilities/NetworkManager';
 
 const Login = () => {
     const [loginError, setLoginError] = React.useState(false);
-    const [loginData, setLoginData] = useOutletContext();
+    const [loginData, setLoginData, signedIn, setSignedIn] = useOutletContext();
     
     const navigate = useNavigate();
     
@@ -27,6 +27,7 @@ const Login = () => {
             console.log(response.data);
             if (response.data) {
                 setLoginError(false);
+                setSignedIn(true);
                 navigate('/orders');
             }
             setLoginError(true);

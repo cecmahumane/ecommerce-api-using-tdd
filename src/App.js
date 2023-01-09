@@ -19,6 +19,8 @@ function App() {
     email: "",
     password: ""
 });
+  const [signedIn, setSignedIn] = React.useState(false);
+
   console.log(sessCart);
   console.log(finalOutput);
 
@@ -41,9 +43,17 @@ function App() {
   return (
     <div className="app">
       <QueryClientProvider client={queryClient}>
-        <Header cartInfo={sessCart} />
+        <Header 
+          cartInfo={sessCart}
+          signedIn={signedIn}
+          setSignedIn={setSignedIn}
+        />
         <Outlet
-          context={[sessCart, setSessCart, finalOutput, setFinalOutput, loginData, setLoginData]}
+          context={[sessCart, setSessCart, 
+            finalOutput, setFinalOutput, 
+            loginData, setLoginData,
+            signedIn, setSignedIn
+          ]}
         />
       </QueryClientProvider>
     </div>

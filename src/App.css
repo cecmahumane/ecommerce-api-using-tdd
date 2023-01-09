@@ -51,6 +51,17 @@ body {
   right: 80px;
 }
 
+
+.login-indicator {
+  background: rgb(255, 2, 2);
+  width: 15px;
+  height: 15px;
+  border-radius: 50px;
+  position: relative;
+  top: px;
+  right:25px;
+}
+
 .cart-and-counter {
   display: flex;
 }
