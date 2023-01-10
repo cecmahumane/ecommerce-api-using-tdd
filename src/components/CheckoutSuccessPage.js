@@ -82,7 +82,6 @@ const CheckoutSuccessPage = () => {
     }
   };
 
-
   let writeToOrderTable = async (userId) => {
     let body = {
       userId: userId,
