@@ -22,6 +22,7 @@ const CheckoutSuccessPage = () => {
  
   const retrieveOutputFromLocalStorage = () => {
     let retrievedOutput = JSON.parse(localStorage.getItem('finalOutput'));
+    console.log(retrievedOutput);
     setFinalOutput(retrievedOutput);
   };
 
@@ -40,7 +41,7 @@ const CheckoutSuccessPage = () => {
       const response = await networkManager.makeRequest("empty_cart", body)
       setSessCart(response);
       localStorage.clear();
-      // setFinalOutput([]);
+      setFinalOutput([]);
     } catch (error) {
         console.log(error);
     }
@@ -71,6 +72,7 @@ const CheckoutSuccessPage = () => {
     } catch (error) {
       console.log(error);
     }
+
     try {
      const response = await networkManager.makeRequest("get_user_id", null);
      console.log(response)
@@ -85,7 +87,7 @@ const CheckoutSuccessPage = () => {
   let writeToOrderTable = async (userId) => {
     let body = {
       userId: userId,
-      orderContent: finalOutput
+      orderContent: JSON.stringify(finalOutput)
     };
     try {
       const response = await networkManager.makeRequest("write_to_order_table", body)
@@ -100,8 +102,6 @@ const CheckoutSuccessPage = () => {
     console.log(finalOutput.length)
     if (finalOutput.length > 0) {
       passwordGenerator();
-      // getOrderInfo();
-      // clearCart();
     } else {
       retrieveOutputFromLocalStorage();
       console.log("local storage retrieved")

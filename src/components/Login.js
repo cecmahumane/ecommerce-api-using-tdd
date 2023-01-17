@@ -5,7 +5,10 @@ import networkManager from '../utilities/NetworkManager';
 
 const Login = () => {
     const [loginError, setLoginError] = React.useState(false);
-    const [loginData, setLoginData, signedIn, setSignedIn] = useOutletContext();
+    const [sessCart, setSessCart, 
+        finalOutput, setFinalOutput, 
+        loginData, setLoginData, 
+        signedIn, setSignedIn] = useOutletContext();
     
     const navigate = useNavigate();
     

@@ -41,6 +41,7 @@ profileRouter.post("/", async (req, res, next) => {
 profileRouter.post("/checkoutProfile", async (req, res, next) => {
     let { email, password } = req.body;
     let slicedCookieId;
+    let userExists;
 
     try {
         // Check frontend for cookie
@@ -49,21 +50,36 @@ profileRouter.post("/checkoutProfile", async (req, res, next) => {
     } catch (error) {
         console.log(error);
     }
-   
-// Commented out for testing of session fetching from database 
-    try {
-        const hash = await bcrypt.hash(password, 10);
-        console.log({
-            email,
-            password,
-            hash,
-            slicedCookieId
-        });
 
-        const newCheckoutUser = await pool.query(queries.usersQueries.insertUserAfterOrder, [email, hash, slicedCookieId]);
-        res.status(200).json(newCheckoutUser);
-    } catch (error) {
-        console.log(error);
+    try {
+        const emailExists = await pool.query(queries.usersQueries.checkEmailExists, [email]);
+        if (emailExists.rows.length) {
+            userExists = true;
+            return res.status(409).send("Duplicate Email");
+        }
+        userExists = false;
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Internal server error!");
+    }
+
+    // Commented out for testing of session fetching from database 
+
+    if (!userExists) {
+        try {
+            const hash = await bcrypt.hash(password, 10);
+            console.log({
+                email,
+                password,
+                hash,
+                slicedCookieId
+            });
+
+            const newCheckoutUser = await pool.query(queries.usersQueries.insertUserAfterOrder, [email, hash, slicedCookieId]);
+            res.status(200).json(newCheckoutUser);
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 );
@@ -71,7 +87,7 @@ profileRouter.post("/checkoutProfile", async (req, res, next) => {
 profileRouter.get("/userId", async (req, res, next) => {
     let sid = req.cookies['connect.sid'].slice(2, 34);
     try {
-        const getUserdId = await pool.query(queries.usersQueries.getUserId, [sid]); 
+        const getUserdId = await pool.query(queries.usersQueries.getUserId, [sid]);
         // console.log(getUserdId);
         res.send(getUserdId);
     } catch (error) {

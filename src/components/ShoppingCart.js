@@ -126,7 +126,6 @@ const ShoppingCart = () => {
         outputToLocalStorage();
         let body = finalOutput
         console.log(body)
-        // const response = await networkManager.checkout(body);
         const response = await networkManager.makeRequest("checkout", body);
         console.log(response)
         if(response.data.url) {

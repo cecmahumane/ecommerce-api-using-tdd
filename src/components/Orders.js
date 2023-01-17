@@ -6,22 +6,31 @@ import OrderItem from './OrderItem';
 
 const Orders = () => {
 
-    const [loginData, setLoginData, finalOutput, setFinalOutput] = useOutletContext();
+    const [sessCart, setSessCart, 
+        finalOutput, setFinalOutput, 
+        loginData, setLoginData,
+        signedIn, setSignedIn] = useOutletContext();
+    
     console.log(loginData);
     
-    // const callOrderData = async () => {
-    //     let data = {
-    //         email: loginData.email,
-    //         // email: "cecmahumane@gmail.com"
-    //     }
-    //     try {
-    //         const response = await networkManager.makeRequest("get_customer_order", data);
-    //         console.log(response.rows[0].order_contents);
-    //         setFinalOutput([response.rows[0].order_contents]);
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // };
+    const callOrderData = async () => {
+        let data = {
+            email: loginData.email,
+            // email: "cecmahumane@gmail.com"
+        }
+        try {
+            const response = await networkManager.makeRequest("get_customer_order", data);
+            console.log(response.data.rows);
+            let compiledOrders = [];
+            let retrievedOrder = response.data.rows.map((specificOrder) => {
+                return compiledOrders.push(JSON.parse(specificOrder.order_contents));
+            })
+            console.log(compiledOrders);
+            setFinalOutput(compiledOrders);
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     let grandTotal;
     console.log(finalOutput)
@@ -32,7 +41,8 @@ const Orders = () => {
 
     try {
         console.log(finalOutput)
-        var itemList = finalOutput.map((item) => {
+        var finalItemList = finalOutput.map((orderItem) => {
+        let itemList = orderItem.map((item) => {
             return (
                 <OrderItem
                     key={nanoid()}
@@ -47,18 +57,21 @@ const Orders = () => {
                 />
             )
         })
+        return itemList;
+    })
+    
     } catch (error) {
         console.log(error);
     }
 
     useEffect(() => {
-        // callOrderData();
+        callOrderData();
     }, []);
 
     return (
         <div>
             <h2>Orders</h2>
-            {finalOutput.length > 0 && itemList}
+            {finalOutput.length > 0 && finalItemList}
             <div className='subtotal-price-order'>
                 <p>Subtotal</p>
                 {finalOutput.length > 0 && <p>${grandTotal}.00</p>}
