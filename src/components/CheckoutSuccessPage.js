@@ -114,7 +114,7 @@ const CheckoutSuccessPage = () => {
     <div>
       <h1>Checkout Successful</h1>
       {Object.keys(orderInfo).length > 1 && <h2>Thank you {orderInfo.data.name} for your purchase!</h2>}
-      {generatedPassword && <p>Your password is <b>{generatedPassword}</b>.</p>}
+      {generatedPassword && <p>Your password is <b>{generatedPassword}</b></p>}
       <h3>Your order confirmation number is: {}</h3>
     </div>
   )

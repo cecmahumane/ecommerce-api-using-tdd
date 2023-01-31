@@ -13,7 +13,8 @@ import CheckoutSuccessPage from './components/CheckoutSuccessPage';
 // import Redirect from './components/Redirect';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Orders from './components/Orders';
+import Orders from './components/Order';
+import OrderList from './components/OrderList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +22,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="orders" element={<Orders />} />
+          <Route path="orders" element={<OrderList />} />
           <Route path="success" element={<CheckoutSuccessPage />} />
           <Route path="cancel" element={<CheckoutCancelPage />} />
           <Route path="login" element={<Login />} />
