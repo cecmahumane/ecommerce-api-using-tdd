@@ -6,15 +6,16 @@ import { nanoid } from 'nanoid';
 
 const CheckoutSuccessPage = () => {
 
-  const [sessCart, setSessCart, finalOutput, setFinalOutput] = useOutletContext();
+  const [
+          sessCart, setSessCart, finalOutput, setFinalOutput, loginData, setLoginData,
+          signedIn, setSignedIn
+        ] = useOutletContext();
   const [orderInfo, setOrderInfo] = React.useState({});
   const [generatedPassword, setGeneratedPassword] = React.useState("");
   const [outputPresent, setOutputPresent] = React.useState(false);
-  // const [finalOutput, setFinalOutput] = useOutletContext();
-  // console.debug("SEARCHPARAMS \n", searchParams.get('session_id'));
+
   console.log(orderInfo);
-  // const params = useParams();
-  // console.log(params)
+  
   const [searchParams, setSearchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id') || '';
   console.log(sessionId);
@@ -114,8 +115,7 @@ const CheckoutSuccessPage = () => {
     <div>
       <h1>Checkout Successful</h1>
       {Object.keys(orderInfo).length > 1 && <h2>Thank you {orderInfo.data.name} for your purchase!</h2>}
-      {generatedPassword && <p>Your password is <b>{generatedPassword}</b></p>}
-      <h3>Your order confirmation number is: {}</h3>
+      {!signedIn && generatedPassword && <p>Your password to sign in and see your previous orders is <b>{generatedPassword}</b></p>}
     </div>
   )
 }

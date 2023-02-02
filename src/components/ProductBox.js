@@ -18,8 +18,8 @@ const ProductBox = () => {
 
       const { data: jsonData } = response;
 
-      setTshirtImage(jsonData[0].image2);
-      setHoodieImage(jsonData[1].image2);
+      // setTshirtImage(jsonData[0].image2);
+      // setHoodieImage(jsonData[1].image2);
       setAllProductData(jsonData);
     } catch (err) {
       console.error(err.message);
@@ -43,7 +43,7 @@ const ProductBox = () => {
           {" "}
           <img
             alt=""
-            src={tshirtImage}
+            src='/images/Greytshirt.png'
             className="grey-tshirt"
             data-test="grey-tshirt-image"
           />
@@ -54,9 +54,31 @@ const ProductBox = () => {
           {" "}
           <img
             alt=""
-            src={hoodieImage}
+            src='/images/Greyhoodie.png'
             className="grey-tshirt"
             data-test="grey-hoodie-image"
+          />
+        </Link>
+      )}
+      {delay() && (
+        <Link to={`products/${allProductData[2].product_name}`}>
+          {" "}
+          <img
+            alt=""
+            src='/images/Greyhat.png'
+            className="grey-hat"
+            data-test="grey-hat-image"
+          />
+        </Link>
+      )}
+      {delay() && (
+        <Link to={`products/${allProductData[3].product_name}`}>
+          {" "}
+          <img
+            alt=""
+            src='/images/Greymug.png'
+            className="grey-mug"
+            data-test="grey-mug-image"
           />
         </Link>
       )}

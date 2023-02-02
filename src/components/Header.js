@@ -39,9 +39,9 @@ const Header = (props) => {
   return (
     <div className='header'>
         <Link to='/'><div className='logo'>
-            <p data-test='logo' className='logo-letter'>S</p>
+            <p data-test='logo' className='logo-letter'>C</p>
         </div></Link>
-        <h1 data-test='main-header'>ShoesMcgees EStore</h1>
+        <Link to='/'><h1 data-test='main-header'>Cecil's E-Commerce Store</h1></Link>
         <div className='cart-and-counter'>
             {props.signedIn && <p className='sign-out' onClick={handleSignOut}><u>Sign Out</u></p>}
             {!props.signedIn && <Link to='/login'> <img src="/images/UserCircle.png" className="accounts-image" data-test="accounts-image" alt='' /> </Link>}

@@ -8,12 +8,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 /* Header */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 1px 2px 25px grey;
+  /* box-shadow: 1px 2px 25px grey; */
 }
 
 .logo {
@@ -31,7 +36,12 @@ body {
 
 .logo-letter {
   font-size: 22px;
+  text-decoration: none;
 }
+
+/* h1 {
+  text-decoration: none;
+} */
 
 .accounts-image {
   margin-right: 15px;
@@ -83,10 +93,12 @@ body {
 
 /* ProductBox */
 .product-box {
-  width: 1240px;
-  height: 606px;
+  width: 80%;
+  /* height: 606px; */
   margin-top: 50px;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 22px;
