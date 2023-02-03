@@ -1,9 +1,14 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import validator from "validator";
 import networkManager from '../utilities/NetworkManager';
 
 const Register = () => {
+  const [sessCart, setSessCart,
+    finalOutput, setFinalOutput,
+    loginData, setLoginData,
+    signedIn, setSignedIn] = useOutletContext();
+
   const navigate = useNavigate();
   const [verifyEmail, setVerifyEmail] = React.useState(false);
   const [verifyPassword, setVerifyPassword] = React.useState(false);
@@ -35,6 +40,15 @@ const Register = () => {
   //   console.log("getSession run")
   // }, []);
 
+  const outputLoginDataToLocalStorage = () => {
+    let registerKeyInfo = {
+      email: registerData.email,
+      password: registerData.password
+    }
+    const loginDataJSON = JSON.stringify(registerKeyInfo);
+    localStorage.setItem('loginData', loginDataJSON);
+  };
+
   const submitData = async (event) => {
     event.preventDefault();
     if (validator.isEmail(registerData.email)) {
@@ -49,6 +63,11 @@ const Register = () => {
         } catch (err) {
           console.error(err.message);
         }
+        outputLoginDataToLocalStorage();
+        setLoginData({
+          email: registerData.email,
+          password: registerData.password
+        })
         setRegisterData({
           email: "",
           password: "",

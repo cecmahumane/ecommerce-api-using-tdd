@@ -5,7 +5,8 @@ import { nanoid } from 'nanoid';
 import networkManager from '../utilities/NetworkManager';
 
 const ShoppingCart = () => {
-    const [sessCart, setSessCart, finalOutput, setFinalOutput] = useOutletContext();
+    const [sessCart, setSessCart, finalOutput, setFinalOutput, loginData, setLoginData,
+        signedIn, setSignedIn] = useOutletContext();
     // const [cartArray, setCartArray] = React.useState([]);
     // const [finalOutput, setFinalOutput] = useOutletContext();
     console.log(sessCart);
@@ -116,14 +117,20 @@ const ShoppingCart = () => {
     // console.log(cartArray);
     // console.log(allProductData);
 
-    const outputToLocalStorage = () => {
+    const finalOutputToLocalStorage = () => {
         const finalOutputJSON = JSON.stringify(finalOutput);
         localStorage.setItem('finalOutput', finalOutputJSON);
     };
 
+    const signedInToLocalStorage = () => {
+        const signedInJSON = JSON.stringify(signedIn);
+        localStorage.setItem('signedIn', signedInJSON);
+    };
+
     const checkout = async () => {
         console.log(finalOutput)
-        outputToLocalStorage();
+        finalOutputToLocalStorage();
+        signedInToLocalStorage();
         let body = finalOutput
         console.log(body)
         const response = await networkManager.makeRequest("checkout", body);

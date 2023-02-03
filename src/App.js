@@ -47,6 +47,8 @@ function App() {
           cartInfo={sessCart}
           signedIn={signedIn}
           setSignedIn={setSignedIn}
+          loginData={loginData}
+          setLoginData={setLoginData}
         />
         <Outlet
           context={[sessCart, setSessCart, 

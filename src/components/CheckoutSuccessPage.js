@@ -21,6 +21,18 @@ const CheckoutSuccessPage = () => {
   console.log(sessionId);
   console.log(finalOutput)
  
+  const retrieveLoginDataFromLocalStorage = () => {
+    let retrievedLoginData = JSON.parse(localStorage.getItem('loginData'));
+    console.log(retrievedLoginData);
+    setLoginData(retrievedLoginData);
+  };
+
+  const retrieveSignedInFromLocalStorage = () => {
+    let retrievedSignedIn = JSON.parse(localStorage.getItem('signedIn'));
+    console.log(retrievedSignedIn);
+    setSignedIn(retrievedSignedIn);
+  };
+
   const retrieveOutputFromLocalStorage = () => {
     let retrievedOutput = JSON.parse(localStorage.getItem('finalOutput'));
     console.log(retrievedOutput);
@@ -41,7 +53,7 @@ const CheckoutSuccessPage = () => {
     try {
       const response = await networkManager.makeRequest("empty_cart", body)
       setSessCart(response);
-      localStorage.clear();
+      // localStorage.clear();
       setFinalOutput([]);
     } catch (error) {
         console.log(error);
@@ -104,8 +116,12 @@ const CheckoutSuccessPage = () => {
     if (finalOutput.length > 0) {
       passwordGenerator();
     } else {
+      retrieveLoginDataFromLocalStorage();
       retrieveOutputFromLocalStorage();
-      console.log("local storage retrieved")
+      retrieveSignedInFromLocalStorage();
+      console.log("local storage retrieved");
+      localStorage.clear();
+      console.log("local storage cleared")
       setOutputPresent(true);
     };
 
@@ -115,7 +131,7 @@ const CheckoutSuccessPage = () => {
     <div>
       <h1>Checkout Successful</h1>
       {Object.keys(orderInfo).length > 1 && <h2>Thank you {orderInfo.data.name} for your purchase!</h2>}
-      {!signedIn && generatedPassword && <p>Your password to sign in and see your previous orders is <b>{generatedPassword}</b></p>}
+      {!loginData && <p>Your password to sign in and see your previous orders is <b>{generatedPassword}</b></p>}
     </div>
   )
 }

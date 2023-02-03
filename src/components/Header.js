@@ -8,6 +8,10 @@ const Header = (props) => {
 
   const handleSignOut = () => {
     props.setSignedIn(false);
+    props.setLoginData({
+      email: "",
+      password: ""
+    })
     navigate('/');
 
   }; 

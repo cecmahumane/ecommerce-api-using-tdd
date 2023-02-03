@@ -22,6 +22,11 @@ const Login = () => {
         });
     };
 
+    const outputLoginDataToLocalStorage = () => {
+        const loginDataJSON = JSON.stringify(loginData);
+        localStorage.setItem('loginData', loginDataJSON);
+    };
+
     const submitData = async (event) => {
         event.preventDefault();
         try {
@@ -32,6 +37,7 @@ const Login = () => {
                 setLoginError(false);
                 setSignedIn(true);
                 navigate('/orders');
+                outputLoginDataToLocalStorage();
             }
             setLoginError(true);
         } catch (error) {

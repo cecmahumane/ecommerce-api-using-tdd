@@ -34,10 +34,9 @@ const ProductPage = () => {
     const addToCart = async () => {
         let body = productData;
         try {
-            if (params.product === "Hoodie" || params.product === "T-Shirt") {
-                if (body.size === "") {
-                    return setSizeAlert(true);
-                }
+
+            if (body.size === "") {
+                return setSizeAlert(true);
             }
             setSizeAlert(false);
             if (!sessCart) {
@@ -173,16 +172,16 @@ const ProductPage = () => {
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
-                    </select> : 
-                    <select
-                    id='size'
-                    data-test='size-drop-down'
-                    value={productData.size}
-                    onChange={handleChange}
-                    name="size"
-                >   <option value="">-- Choose Size --</option>
-                    <option value="OS">OS</option>
-                    </select>}
+                    </select> :
+                        <select
+                            id='size'
+                            data-test='size-drop-down'
+                            value={productData.size}
+                            onChange={handleChange}
+                            name="size"
+                        >   <option value="">-- Choose Size --</option>
+                            <option value="OS">OS</option>
+                        </select>}
                     <br />
                     <br />
                     {sizeAlert && <div>
@@ -192,7 +191,7 @@ const ProductPage = () => {
                     <button data-test='add-to-cart' onClick={addToCart}>Add to Cart</button>
                 </form>
                 <br />
-                {(params.product !== "Hoodie" && params.product !== "T-Shirt") && <p>*One Size Fits All</p>}
+                {params.product === "Mug" && <p>*One Size Fits All</p>}
             </div>
         </div>
     )

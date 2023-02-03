@@ -8,6 +8,16 @@ const validator = require("validator");
 //"POST" a hashed password and username
 profileRouter.post("/", async (req, res, next) => {
     let { email, password, confirmPassword } = req.body;
+    let slicedCookieId;
+
+    try {
+        // Check frontend for cookie
+        slicedCookieId = req.cookies['connect.sid'].slice(2, 34);
+        console.log(slicedCookieId);
+    } catch (error) {
+        console.log(error);
+    }
+
     if (!validator.isEmail(email)) {
         console.log("Enter a valid email");
     }
@@ -29,7 +39,8 @@ profileRouter.post("/", async (req, res, next) => {
             hash,
         });
 
-        const newEmail = await pool.query(queries.usersQueries.insertLogin, [email, hash]);
+        // const newEmail = await pool.query(queries.usersQueries.insertLogin, [email, hash]);
+        const newEmail = await pool.query(queries.usersQueries.insertUserAfterOrder, [email, hash, slicedCookieId]);
         res.status(200).json(newEmail);
     } catch (err) {
         console.log(err);
