@@ -259,3 +259,12 @@ a {
   margin-top: 15px;
   margin-left: 30px;
 }
+
+.orders {
+  padding-left: 50px;
+}
+
+hr {
+  width: 100%;
+  padding: 0px;
+}

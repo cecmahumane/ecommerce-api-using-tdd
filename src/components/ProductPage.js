@@ -18,6 +18,8 @@ const ProductPage = () => {
     })
     // console.log(productData);
 
+    console.log(params)
+
     const getProductData = async () => {
         try {
             // const response = await networkManager.getSingleProductData(params);
@@ -32,8 +34,10 @@ const ProductPage = () => {
     const addToCart = async () => {
         let body = productData;
         try {
-            if (body.size === "") {
-                return setSizeAlert(true);
+            if (params.product === "Hoodie" || params.product === "T-Shirt") {
+                if (body.size === "") {
+                    return setSizeAlert(true);
+                }
             }
             setSizeAlert(false);
             if (!sessCart) {
@@ -104,11 +108,11 @@ const ProductPage = () => {
         } catch (error) {
             console.log(error)
         }
-        try {
+        // try {
 
-        } catch (error) {
-            console.log(error)
-        }
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
 
     if (productData.size === "") {
@@ -158,7 +162,7 @@ const ProductPage = () => {
             <div className='specs'>
                 <div dangerouslySetInnerHTML={{ __html: htmlString }} />
                 <form onSubmit={handleSubmit}>
-                    <select
+                    {params.product === "Hoodie" || params.product === "T-Shirt" ? <select
                         id='size'
                         data-test='size-drop-down'
                         value={productData.size}
@@ -169,7 +173,16 @@ const ProductPage = () => {
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
-                    </select>
+                    </select> : 
+                    <select
+                    id='size'
+                    data-test='size-drop-down'
+                    value={productData.size}
+                    onChange={handleChange}
+                    name="size"
+                >   <option value="">-- Choose Size --</option>
+                    <option value="OS">OS</option>
+                    </select>}
                     <br />
                     <br />
                     {sizeAlert && <div>
@@ -178,6 +191,8 @@ const ProductPage = () => {
                     </div>}
                     <button data-test='add-to-cart' onClick={addToCart}>Add to Cart</button>
                 </form>
+                <br />
+                {(params.product !== "Hoodie" && params.product !== "T-Shirt") && <p>*One Size Fits All</p>}
             </div>
         </div>
     )

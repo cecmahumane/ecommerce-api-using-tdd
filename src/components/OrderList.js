@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Order from './Order'
 import { useOutletContext } from 'react-router-dom'
 import { nanoid } from 'nanoid';
@@ -31,12 +31,12 @@ const OrderList = () => {
             <Order
                 key={nanoid()}
                 order={order}
-                // sessCart={sessCart}
-                // setSessCart={setSessCart}
-                // finalOutput={finalOutput}
-                // setFinalOutput={setFinalOutput}
-                // loginData={loginData}
-                // setLoginData={setLoginData}
+            // sessCart={sessCart}
+            // setSessCart={setSessCart}
+            // finalOutput={finalOutput}
+            // setFinalOutput={setFinalOutput}
+            // loginData={loginData}
+            // setLoginData={setLoginData}
 
             />
         )
@@ -49,8 +49,10 @@ const OrderList = () => {
 
     return (
         <div>
-            <h2>Orders</h2>
-            {allOrders}
+            <div className='orders'>
+                <h2>Orders</h2>
+                {allOrders}
+            </div>
         </div>
     )
 }
