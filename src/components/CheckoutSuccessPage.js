@@ -131,7 +131,9 @@ const CheckoutSuccessPage = () => {
     <div>
       <h1>Checkout Successful</h1>
       {Object.keys(orderInfo).length > 1 && <h2>Thank you {orderInfo.data.name} for your purchase!</h2>}
-      {!loginData && <p>Your password to sign in and see your previous orders is <b>{generatedPassword}</b></p>}
+      {(!loginData && !signedIn) && <p>Your password to sign in and see your previous orders is <b>{generatedPassword}</b></p>}
+      {(loginData && !signedIn) && <p>Please use the password and username you already created to see your previous orders</p>}
+      {(loginData && signedIn) && <p>Please use the password and username you already created to see your previous orders</p>}
     </div>
   )
 }
