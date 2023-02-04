@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import CartItem from './CartItem';
-import { useLocation, useOutletContext } from 'react-router-dom'
+import { useLocation, useOutletContext, Link } from 'react-router-dom'
 import { nanoid } from 'nanoid';
 import networkManager from '../utilities/NetworkManager';
 
@@ -127,10 +127,16 @@ const ShoppingCart = () => {
         localStorage.setItem('signedIn', signedInJSON);
     };
 
+    const sessCartToLocalStorage = () => {
+        const sessCartJSON = JSON.stringify(sessCart);
+        localStorage.setItem('sessCart', sessCartJSON);
+    };
+
     const checkout = async () => {
         console.log(finalOutput)
         finalOutputToLocalStorage();
         signedInToLocalStorage();
+        sessCartToLocalStorage();
         let body = finalOutput
         console.log(body)
         const response = await networkManager.makeRequest("checkout", body);
@@ -154,6 +160,9 @@ const ShoppingCart = () => {
                 </div>
             </div>}
             {itemList.length === 0 && <h3>Your Cart Is Empty</h3>}
+            {itemList.length === 0 && <Link to='/'><div className='continue-shopping'>
+                    <p className='continue-shopping-text'>Continue Shopping</p>
+                </div></Link>}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Order from './Order'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext, Link } from 'react-router-dom'
 import { nanoid } from 'nanoid';
 import networkManager from '../utilities/NetworkManager';
 
@@ -52,6 +52,12 @@ const OrderList = () => {
             <div className='orders'>
                 <h2>Orders</h2>
                 {allOrders}
+                {!finalOutput.length && <div>
+                    <p>You have no order history.</p>
+                    <Link to='/'><div className='continue-shopping'>
+                        <p className='continue-shopping-text'>Continue Shopping</p>
+                    </div></Link>
+                </div>}
             </div>
         </div>
     )
