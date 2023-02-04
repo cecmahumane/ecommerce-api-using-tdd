@@ -1,10 +1,11 @@
 CREATE DATABASE ecommerceapi;
 
 CREATE TABLE IF NOT EXISTS users(
-    user_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     email VARCHAR(255), 
     passwordhash VARCHAR(255),
-    order_id VARCHAR (255)    
+    order_id VARCHAR (255),
+    session_id VARCHAR(255)  
 );
 
 CREATE TABLE IF NOT EXISTS products(
@@ -26,6 +27,14 @@ CREATE TABLE IF NOT EXISTS orders(
   user_id INT,
   CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES users(id)
 );
+
+ALTER TABLE orders
+DROP CONSTRAINT fk_user_id,
+ADD CONSTRAINT fk_user_id 
+FOREIGN KEY(user_id) 
+REFERENCES users(id) 
+ON DELETE CASCADE
+;
 
 CREATE TABLE IF NOT EXISTS "session" (
   "sid" varchar NOT NULL COLLATE "default",
