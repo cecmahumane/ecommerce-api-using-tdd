@@ -10,14 +10,14 @@ const pool = require("./db");
 const queries = require("./queries");
 // const stripe = require('stripe')(process.env.STRIPE_KEY)
 
-const pgPool = new pg.Pool({
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  host: process.env.HOST,
-  port: process.env.DBPORT,
-  database: process.env.DATABASE_URL,
-  // Insert pool options here
-});
+// const pgPool = new pg.Pool({
+//   user: process.env.USER,
+//   password: process.env.PASSWORD,
+//   host: process.env.DATABASE_URL,
+//   port: process.env.DBPORT,
+//   database: process.env.DATABASE,
+//   // Insert pool options here
+// });
 
 app.use(
   cors({
@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     store: new pgSession({
-      pool: pgPool, // Connection pool
+      pool: pool, // Connection pool
       tableName: "session", // Use another table-name than the default "session" one
       // Insert connect-pg-simple options here
     }),
