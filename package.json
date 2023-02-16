@@ -28,7 +28,7 @@
     "build:staging": "env-cmd -f .env.staging npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "cd server && nodemon index.js",
+    "server": "cd server && node index.js",
     "staging": "concurrently -n client,nodeserver -c cyan,red \"env-cmd -f .env.staging npm run start\" \"env-cmd -f .env.staging npm run server\"",
     "dev": "concurrently -n client,nodeserver -c cyan,red \"npm run start\" \"npm run server\""
   },
