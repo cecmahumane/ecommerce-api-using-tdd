@@ -51,7 +51,7 @@ Firstly to avoid having server and front end connection errors you will need add
 REACT_APP_ORIGIN=http://localhost:5000
 ```
 
-Secondly to connect to your PostgreSQL Database you will then want to create another .env file inside the server folder. The .env file should contain the following environment variables in this format, but please note that where (*) are used represent your own unique PostgreSQL databse credentials: 
+Secondly to connect to your PostgreSQL Database you will then want to create another .env file inside the server folder. The .env file should contain the following environment variables in this format, but please note that where (*) are used represent your own unique PostgreSQL database credentials: 
 
 ```
 USER=*****
