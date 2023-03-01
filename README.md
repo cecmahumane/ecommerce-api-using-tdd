@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="" rel="noopener">
+  <a href="https://ecommerce.cecilmahumane.com" rel="noopener">
  <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
 </p>
 
@@ -24,7 +24,6 @@
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
@@ -32,13 +31,13 @@
 ## 🧐 About <a name = "about"></a>
 The purpose of this project is to build an e-commerce REST API using our knowledge of server side development.
 
-This project required that I build a fully-functioning e-commerce application REST API that allows users to perform various CRUD operations such as registering an account, browsing products for sale, etc.
+This project required that I build a fully-functioning e-commerce application REST API that allows users to perform various CRUD operations such as registering an account, signing in, browsing products for sale, making orders, and checking their order history.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for the link to the live application.
 
 ### Prerequisites
-Before anything remember to install all the dependencies using
+Before doing anything remember to install all the dependencies using
 
 ```
 npm install
@@ -145,15 +144,28 @@ describe('Register button functionality', () => {
 ```
 
 ## 🎈 Usage <a name="usage"></a>
-Feel free to click through the e-commerce store like you would any online shop. As of now the functionality is limited to registering your user credentials to the databse and looking at products from the main page.
+Feel free to click through the e-commerce store like you would any online shop. You can make orders and see your order history if you sign in after the checkout process.
+
+Please note that is a demonstration project only, and no personal data such as real credit card information or email addresses should be entered into the checkout form. 
+
+To proceed through the checkout flow enter your credentials as described below:
+```
+Email: Enter a valid email address
+Credit card number: 4242424242424242
+Expiry: 12/34
+CVC: 123
+Name on card: Enter a name
+Country: Canada
+Postal Code: Enter a valid postal code
+```
 
 ## 🚀 Deployment <a name = "deployment"></a>
-I am aiming to deploy this API on Heroku.
+The app is live here [https://ecommerce.cecilmahumane.com](https://ecommerce.cecilmahumane.com). This app was deployed using Dokku and AWS. 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [PostgreSQL](https://www.mongodb.com/) - Database
+- [PostgreSQL](https://www.postgresql.org/) - Database
 - [ExpressJs](https://expressjs.com/) - Server Framework
-- [ReactJs](https://vuejs.org/) - Web Framework
+- [ReactJs](https://reactjs.org/) - Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 - [Cypress](https://www.cypress.io/) - Testing Suite
 
